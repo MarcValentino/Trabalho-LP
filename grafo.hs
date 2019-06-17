@@ -1,13 +1,3 @@
-data Tree a = Operation a (Tree a) (Tree a) | Atom a | EmptyTree deriving (Show, Read, Eq)
-
---evaluate::(Eq a) => Tree a -> Bool
-
---evaluate (EmptyTree) = False
---evaluate (Atom a) = False
---evaluate (Operation a left right)
---    | a == ">" = ((evaluate left) == False) || ((evaluate right) == True)
---    | otherwise = False
-
 --Acha todos os nós conectados a um determinado nó pela execução de um programa
 
 lookUpPaths:: [(String, String)] -> String -> [String]
@@ -17,7 +7,8 @@ lookUpPaths (nd:list) path
     |((snd nd) /= path) = lookUpPaths list path
     |otherwise = []
     
-        
+--Acha nó na lista de nós do grafo
+
 findNode::[(String, [(String, String)])] -> [String] -> Int
 
 findNode _ [] = -1
@@ -57,6 +48,7 @@ searchPath graph path i =
         connectedNodes = lookUpPaths (snd currNode) path
         nextNode = findNode graph connectedNodes
     in
+        
         (fst currNode) : searchPath graph path nextNode        
         
 
